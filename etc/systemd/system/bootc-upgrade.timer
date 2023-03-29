@@ -1,0 +1,9 @@
+[Unit]
+Description=bootc system upgrade
+
+[Timer]
+OnCalendar=Sat 20:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
