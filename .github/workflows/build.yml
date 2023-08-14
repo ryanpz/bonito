@@ -61,13 +61,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Sign container
-      - uses: sigstore/cosign-installer@v3.0.1
+      - uses: sigstore/cosign-installer@v3.1.1
 
       - name: Sign container image
         run: |
-          echo "${{ env.COSIGN_PRIVATE_KEY }}" > cosign.key
-          wc -c cosign.key
-          cosign sign -y --key cosign.key ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}@${TAGS}
+          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
