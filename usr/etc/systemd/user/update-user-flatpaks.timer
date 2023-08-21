@@ -1,5 +1,6 @@
 [Unit]
 Description=Update user Flatpaks weekly
+Documentation=man:flatpak(1)
 
 [Timer]
 OnCalendar=Sat 20:00
