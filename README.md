@@ -1,10 +1,10 @@
-# sericea
+# fedora-oci-images
 
-My (very experimental) OCI image derived from [Fedora Sericea 38](https://docs.fedoraproject.org/en-US/fedora-sericea/)
+My (very experimental) OCI images derived from Fedora's image-based desktops
 
-## Changes from stock Sericea
+## Changes from stock images
 
-* Ships with `podman-compose`
-* Removes native Firefox from the base image
+* Adds `podman-compose`
+* Removes `gnome-software` and `firefox`
 * Sets automatic weekly system upgrades
-* Automatic weekly updates for user-installed flatpaks (disabled by default)
+* Adds an optional service that updates user-installed flatpaks weekly
