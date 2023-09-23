@@ -1,4 +1,4 @@
-FROM quay.io/fedora-ostree-desktops/sericea:38
+FROM quay.io/fedora-ostree-desktops/sericea:39
 
 COPY usr /usr
 
