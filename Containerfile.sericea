@@ -3,7 +3,7 @@ FROM quay.io/fedora-ostree-desktops/sericea:39
 COPY usr /usr
 
 RUN rpm-ostree override remove firefox firefox-langpacks && \
-    rpm-ostree install podman-compose && \
+    rpm-ostree install podman-compose mbpfan && \
     systemctl enable rpm-ostreed-automatic.timer && \
     rpm-ostree cleanup -m && \
     ostree container commit

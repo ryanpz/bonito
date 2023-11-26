@@ -3,7 +3,7 @@ FROM quay.io/fedora/fedora-kinoite:39
 COPY usr /usr
 
 RUN rpm-ostree override remove firefox firefox-langpacks plasma-discover-rpm-ostree plasma-discover-flatpak && \
-    rpm-ostree install podman-compose wl-clipboard && \
+    rpm-ostree install podman-compose wl-clipboard mbpfan && \
     systemctl enable rpm-ostreed-automatic.timer && \
     rpm-ostree cleanup -m && \
     ostree container commit
