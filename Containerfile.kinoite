@@ -1,4 +1,4 @@
-FROM quay.io/fedora-ostree-desktops/kinoite:rawhide
+FROM quay.io/fedora/fedora-kinoite:40
 
 COPY usr /usr
 
