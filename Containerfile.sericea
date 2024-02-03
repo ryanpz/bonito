@@ -1,4 +1,4 @@
-FROM quay.io/fedora/fedora-sericea:39
+FROM quay.io/fedora/fedora-sericea:40
 
 COPY usr /usr
 
