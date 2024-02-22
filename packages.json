@@ -1,0 +1,25 @@
+{
+  "all": {
+    "include": [
+      "mbpfan",
+      "podman-compose"
+    ],
+    "exclude": [
+      "firefox",
+      "firefox-langpacks"
+    ]
+  },
+  "silverblue": {
+    "include": [
+      "wl-clipboard"
+    ],
+    "exclude": [
+      "gnome-software",
+      "gnome-software-rpm-ostree"
+    ]
+  },
+  "sericea": {
+    "include": [],
+    "exclude": []
+  }
+}
