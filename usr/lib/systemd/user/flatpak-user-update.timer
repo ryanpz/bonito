@@ -1,5 +1,5 @@
 [Unit]
-Description=Update user Flatpaks weekly
+Description=Flatpak Automatic Update Trigger
 Documentation=man:flatpak(1)
 
 [Timer]
