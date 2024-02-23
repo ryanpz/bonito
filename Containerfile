@@ -7,6 +7,7 @@ FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION}
 ARG FEDORA_SPIN
 
 COPY usr /usr
+COPY cosign.pub /usr/etc/pki/containers/ry-p.pub
 
 COPY build.sh packages.json /tmp/ry-p/
 
