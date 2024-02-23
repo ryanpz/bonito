@@ -11,9 +11,9 @@ exclude_list=$(package_list 'exclude')
 include_list=$(package_list 'include')
 
 # shellcheck disable=SC2086
-rpm-ostree override remove $exclude_list
+[ -n "$exclude_list" ] && rpm-ostree override remove $exclude_list
 # shellcheck disable=SC2086
-rpm-ostree install $include_list
+[ -n "$include_list" ] && rpm-ostree install $include_list
 systemctl enable rpm-ostreed-automatic.timer
 systemctl enable flatpak-system-update.timer
 systemctl --global enable flatpak-user-update.timer
