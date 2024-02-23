@@ -14,6 +14,4 @@ rpm-ostree override remove $(exclude_pkgs) && \
     rpm-ostree install $(include_pkgs) && \
     systemctl enable rpm-ostreed-automatic.timer && \
     systemctl enable flatpak-system-update.timer && \
-    systemctl --global enable flatpak-user-update.timer && \
-    rpm-ostree cleanup -m && \
-    ostree container commit
+    systemctl --global enable flatpak-user-update.timer

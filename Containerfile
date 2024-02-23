@@ -8,7 +8,8 @@ ARG FEDORA_SPIN
 
 COPY usr /usr
 
-COPY build.sh /tmp/ry-p/
-COPY packages.json /tmp/ry-p/
+COPY build.sh packages.json /tmp/ry-p/
 
-RUN /tmp/ry-p/build.sh
+RUN /tmp/ry-p/build.sh && \
+    rpm-ostree cleanup -m && \
+    ostree container commit
