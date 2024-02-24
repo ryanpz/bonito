@@ -2,7 +2,7 @@
 
 set -eu
 
-jq_args="-r '.all.{{X}}[], .$FEDORA_SPIN.{{X}}[]' /tmp/ry-p/packages.json"
+jq_args="-r '.all.{{X}}[], .$FEDORA_ATOMIC_SPIN.{{X}}[]' /tmp/ry-p/packages.json"
 package_list() {
     echo "$jq_args" | sed "s/{{X}}/$1/g" | xargs jq
 }

@@ -1,10 +1,10 @@
-ARG FEDORA_SPIN=silverblue
-ARG BASE_IMAGE=quay.io/fedora/fedora-${FEDORA_SPIN}
+ARG FEDORA_ATOMIC_SPIN=silverblue
+ARG BASE_IMAGE=quay.io/fedora/fedora-${FEDORA_ATOMIC_SPIN}
 ARG FEDORA_MAJOR_VERSION=39
 
 FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION}
 
-ARG FEDORA_SPIN
+ARG FEDORA_ATOMIC_SPIN
 
 COPY usr /usr
 COPY cosign.pub /usr/etc/pki/containers/ry-p.pub
