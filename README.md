@@ -1,6 +1,6 @@
-# fedora-oci-images
+# fedora-atomic-images
 
-My (very experimental) OCI images derived from Fedora's image-based desktops
+My customized versions of the official Fedora Atomic Desktop OCI images
 
 ## Changes from stock images
 
