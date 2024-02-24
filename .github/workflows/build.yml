@@ -29,8 +29,8 @@ jobs:
           - sericea
         major_version: [39, 40]
         include:
-          - major_version: 40
-            is_latest_version: true
+          - major_version: 39
+            is_current_version: true
     steps:
       # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action
@@ -48,9 +48,9 @@ jobs:
           # Generate a timestamp for creating an image version history
           TIMESTAMP="$(date +%Y%m%d)"
           MAJOR_VERSION="${{ matrix.major_version }}"
-          BUILD_TAGS=("${MAJOR_VERSION}" "${TIMESTAMP}" "${MAJOR_VERSION}-${TIMESTAMP}")
+          BUILD_TAGS=("${MAJOR_VERSION}" "${MAJOR_VERSION}-${TIMESTAMP}")
 
-          if [[ "${{ matrix.is_latest_version }}" == "true" ]]; then
+          if [[ "${{ matrix.is_current_version }}" == "true" ]]; then
               BUILD_TAGS+=("latest")
           fi
 
@@ -61,7 +61,7 @@ jobs:
 
           echo "tags=${BUILD_TAGS[*]}" >> $GITHUB_OUTPUT
 
-      - name: Get current version
+      - name: Get base image version
         id: labels
         uses: Wandalen/wretry.action@v1.4.4
         with:
