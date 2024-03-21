@@ -8,7 +8,7 @@ Images based on the following atomic spins are built daily:
 
 ## Changes from base images
 
-* Adds `podman-compose`, `wl-clipboard`, and `mbpfan`
+* Adds `wl-clipboard`, and `mbpfan`
 * Removes `firefox` and desktop-specific automatic update systems
 * Enables automatic weekly system updates via `rpm-ostreed`
 * Adds and enables services that update flatpaks weekly
