@@ -31,9 +31,6 @@ jobs:
         include:
           - major_version: 40
             is_current_version: true
-        exclude:
-          - atomic_spin: sericea
-            major_version: 40
     steps:
       # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action
