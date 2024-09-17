@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
-  BASE_IMAGE_REGISTRY: quay.io/fedora
+  BASE_IMAGE_REGISTRY: quay.io/fedora-ostree-desktops
 
 jobs:
   push-ghcr:
@@ -42,7 +42,7 @@ jobs:
       - name: Generate path to base image's repository
         id: base-image
         run: |
-          echo "path=${{ env.BASE_IMAGE_REGISTRY }}/fedora-${{ matrix.atomic_spin }}" >> $GITHUB_OUTPUT
+          echo "path=${{ env.BASE_IMAGE_REGISTRY }}/${{ matrix.atomic_spin }}" >> $GITHUB_OUTPUT
 
       - name: Generate tags
         id: generate-tags
