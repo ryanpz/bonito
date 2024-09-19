@@ -7,7 +7,7 @@ on:
       - '**.md'
       - '**.txt'
   schedule:
-    - cron: '0 15 * * *'  # 3pm UTC everyday (timed against official fedora container pushes)
+    - cron: '0 5 * * *'  # 5am UTC everyday (timed against official fedora container pushes)
   workflow_dispatch:
 env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}

@@ -10,6 +10,6 @@ Images based on the following atomic spins are built daily:
 
 * Adds `wl-clipboard`, and `mbpfan`
 * Removes `firefox` and desktop-specific automatic update systems
-* Enables automatic weekly system updates via `rpm-ostreed`
-* Adds and enables services that update flatpaks weekly
+* Enables automatic daily system updates via `rpm-ostreed`
+* Adds and enables services that update flatpaks daily
 * Adds the public key and configurations required to verify these signed images
