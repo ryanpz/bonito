@@ -6,7 +6,7 @@ FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION}
 
 ARG FEDORA_ATOMIC_SPIN
 
-COPY usr /usr
+COPY files/usr /usr
 COPY cosign.pub /usr/etc/pki/containers/ryanpz.pub
 
 COPY build.sh packages.json /tmp/ryanpz/
