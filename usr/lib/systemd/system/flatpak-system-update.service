@@ -6,4 +6,4 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/flatpak --system uninstall --unused -y --noninteractive ; /usr/bin/flatpak --system update -y --noninteractive ; /usr/bin/flatpak --system repair
+ExecStart=/usr/bin/dbus-run-session /usr/bin/flatpak --system uninstall --unused -y --noninteractive ; /usr/bin/dbus-run-session  /usr/bin/flatpak --system update -y --noninteractive ; /usr/bin/dbus-run-session /usr/bin/flatpak --system repair
