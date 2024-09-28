@@ -20,10 +20,10 @@
                     "keyPath": "/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release"
                 }
             ],
-            "ghcr.io/ry-p": [
+            "ghcr.io/ryanpz": [
                 {
                     "type": "sigstoreSigned",
-                    "keyPath": "/usr/etc/pki/containers/ry-p.pub",
+                    "keyPath": "/usr/etc/pki/containers/ryanpz.pub",
                     "signedIdentity": {
                         "type": "matchRepository"
                     }
