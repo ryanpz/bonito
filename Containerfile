@@ -6,8 +6,12 @@ FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION}
 
 ARG FEDORA_ATOMIC_SPIN
 
-COPY files/usr /usr
-COPY cosign.pub /usr/etc/pki/containers/ryanpz.pub
+COPY files/system/etc /etc
+COPY files/system/usr /usr
+
+COPY files/signing/policy.json /usr/etc/containers/policy.json
+COPY files/signing/registry-config.yaml /etc/containers/registries.d/ryanpz.yaml
+COPY cosign.pub /etc/pki/containers/ryanpz.pub
 
 COPY build.sh packages.json /tmp/ryanpz/
 

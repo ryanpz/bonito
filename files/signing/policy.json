@@ -23,7 +23,7 @@
             "ghcr.io/ryanpz": [
                 {
                     "type": "sigstoreSigned",
-                    "keyPath": "/usr/etc/pki/containers/ryanpz.pub",
+                    "keyPath": "/etc/pki/containers/ryanpz.pub",
                     "signedIdentity": {
                         "type": "matchRepository"
                     }
