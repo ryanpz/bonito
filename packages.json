@@ -1,7 +1,11 @@
 {
   "all": {
     "include": [
-      "mbpfan"
+      "alacritty",
+      "distrobox",
+      "fzf",
+      "mbpfan",
+      "ripgrep"
     ],
     "exclude": [
       "firefox",
