@@ -2,7 +2,12 @@
 
 set -eu
 
-jq_args="-r '.all.{{X}}[], .$FEDORA_ATOMIC_SPIN.{{X}}[]' /tmp/ryanpz/packages.json"
+if [ ! -f "$1" ]; then
+    printf 'error: packages_file %s does not exist\n' "$1"
+    exit 1
+fi
+
+jq_args="-r '.all.{{X}}[], .$FEDORA_ATOMIC_SPIN.{{X}}[]' $1"
 package_list() {
     echo "$jq_args" | sed "s/{{X}}/$1/g" | xargs jq
 }

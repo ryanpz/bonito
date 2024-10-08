@@ -15,6 +15,6 @@ COPY cosign.pub /etc/pki/containers/ryanpz.pub
 
 COPY build.sh packages.json /tmp/ryanpz/
 
-RUN /tmp/ryanpz/build.sh && \
+RUN /tmp/ryanpz/build.sh /tmp/ryanpz/packages.json && \
     rpm-ostree cleanup -m && \
     ostree container commit
