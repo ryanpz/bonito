@@ -9,7 +9,7 @@ Images based on the following atomic spins are built daily:
 ## Changes from base images
 
 * Adds:
-  *  `alacritty`, `distrobox`, `fzf`, `mbpfan`, `ripgrep`
+  *  `distrobox`, `foot`, `fzf`, `mbpfan`, `ripgrep`
   *  automatic daily system updates via `rpm-ostreed`
   *  automatic daily flatpak updates
   *  public key and configurations required to verify these signed images
