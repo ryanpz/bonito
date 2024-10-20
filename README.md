@@ -1,4 +1,4 @@
-# fedora-atomic-images
+# fedora-atomic
 
 My customized Fedora Atomic Desktop OCI images
 
