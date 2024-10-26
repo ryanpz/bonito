@@ -7,7 +7,7 @@ if [ ! -f "$1" ]; then
     exit 1
 fi
 
-jq_args="-r '.all.{{X}}[], .$FEDORA_ATOMIC_SPIN.{{X}}[]' $1"
+jq_args="-r '.all.{{X}}[], .\"$FEDORA_ATOMIC_SPIN\".{{X}}[]' $1"
 package_list() {
     echo "$jq_args" | sed "s/{{X}}/$1/g" | xargs jq
 }

@@ -24,5 +24,9 @@
   "sericea": {
     "include": [],
     "exclude": []
+  },
+  "cosmic-atomic": {
+    "include": [],
+    "exclude": []
   }
 }
