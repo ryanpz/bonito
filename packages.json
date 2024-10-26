@@ -21,7 +21,7 @@
       "gnome-software-rpm-ostree"
     ]
   },
-  "sericea": {
+  "sway-atomic": {
     "include": [],
     "exclude": []
   },

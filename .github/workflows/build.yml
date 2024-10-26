@@ -26,7 +26,7 @@ jobs:
       matrix:
         atomic_spin:
           - silverblue
-          - sericea
+          - sway-atomic
           - cosmic-atomic
         major_version: [40, 41]
         include:
@@ -35,6 +35,8 @@ jobs:
         exclude:
           - major_version: 40
             atomic_spin: cosmic-atomic
+          - major_version: 40
+            atomic_spin: sway-atomic
     steps:
       # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action

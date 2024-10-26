@@ -4,7 +4,7 @@ My customized Fedora Atomic Desktop OCI images
 
 Images based on the following atomic spins are built daily:
 * Silverblue ([base images](https://quay.io/repository/fedora-ostree-desktops/silverblue))
-* Sway Atomic ([base images](https://quay.io/repository/fedora-ostree-desktops/sericea))
+* Sway Atomic ([base images](https://quay.io/repository/fedora-ostree-desktops/sway-atomic))
 * Cosmic Atomic ([base images](https://quay.io/repository/fedora-ostree-desktops/cosmic-atomic))
 
 ## Changes from base images
