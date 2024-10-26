@@ -30,7 +30,7 @@ jobs:
           - cosmic-atomic
         major_version: [40, 41]
         include:
-          - major_version: 40
+          - major_version: 41
             is_current_version: true
         exclude:
           - major_version: 40
