@@ -21,6 +21,15 @@
       "gnome-software-rpm-ostree"
     ]
   },
+  "kinoite": {
+    "include": [
+      "wl-clipboard"
+    ],
+    "exclude": [
+      "plasma-discover-rpm-ostree",
+      "plasma-discover-flatpak"
+    ]
+  },
   "sway-atomic": {
     "include": [],
     "exclude": []

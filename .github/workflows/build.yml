@@ -26,6 +26,7 @@ jobs:
       matrix:
         atomic_spin:
           - silverblue
+          - kinoite
           - sway-atomic
           - cosmic-atomic
         major_version: [40, 41]
