@@ -1,4 +1,4 @@
-ARG FEDORA_ATOMIC_SPIN=silverblue
+ARG FEDORA_ATOMIC_SPIN=sway-atomic
 ARG BASE_IMAGE=quay.io/fedora-ostree-desktops/${FEDORA_ATOMIC_SPIN}
 ARG FEDORA_MAJOR_VERSION=39
 

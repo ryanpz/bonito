@@ -12,15 +12,6 @@
       "firefox-langpacks"
     ]
   },
-  "silverblue": {
-    "include": [
-      "wl-clipboard"
-    ],
-    "exclude": [
-      "gnome-software",
-      "gnome-software-rpm-ostree"
-    ]
-  },
   "kinoite": {
     "include": [
       "wl-clipboard"

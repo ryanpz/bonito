@@ -25,7 +25,6 @@ jobs:
       fail-fast: false
       matrix:
         atomic_spin:
-          - silverblue
           - kinoite
           - sway-atomic
           - cosmic-atomic
