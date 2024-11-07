@@ -13,6 +13,7 @@ Images based on the following atomic spins are built daily:
   *  `distrobox`, `foot`, `fzf`, `mbpfan`, `ripgrep`
   *  automatic daily system updates via `rpm-ostreed`
   *  automatic daily flatpak updates
+  *  suspend on power button short press, poweroff on long press
   *  public key and configurations required to verify these signed images
 * Removes:
   *  `firefox`
