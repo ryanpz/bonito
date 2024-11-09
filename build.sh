@@ -7,6 +7,7 @@ mkdir -p /usr/etc/containers \
     /etc/pki/containers
 
 cp -r /ctx/files/system/etc/* /etc
+cp -r /ctx/files/system/usr/* /usr
 cp /ctx/files/signing/policy.json /usr/etc/containers/policy.json
 cp /ctx/files/signing/registry-config.yaml /etc/containers/registries.d/ryanpz.yaml
 cp /ctx/cosign.pub /etc/pki/containers/ryanpz.pub
