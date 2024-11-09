@@ -1,0 +1,29 @@
+#!/bin/sh
+
+set -e
+
+FLATPAKS=${FLATPAKS:-'/usr/share/bonito/flatpaks.json'}
+variant=
+
+. /etc/os-release
+
+case "$VARIANT_ID" in
+*sway*)
+	variant='sway'
+	;;
+esac
+
+jq_args="-r '.all.{{X}}[], .\"$variant\".{{X}}[]' $FLATPAKS"
+package_list() {
+    echo "$jq_args" | sed "s/{{X}}/$1/g" | xargs jq
+}
+
+exclude_list=$(package_list 'exclude')
+include_list=$(package_list 'include')
+
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# shellcheck disable=SC2086
+[ -n "$exclude_list" ] && flatpak uninstall --user -y flathub $exclude_list
+# shellcheck disable=SC2086
+[ -n "$include_list" ] && flatpak install --user -y flathub $include_list

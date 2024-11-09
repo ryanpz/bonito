@@ -1,0 +1,20 @@
+{
+  "all": {
+    "include": [
+      "com.brave.Browser",
+      "com.github.tchx84.Flatseal",
+      "com.obsproject.Studio",
+      "com.valvesoftware.Steam",
+      "io.mpv.Mpv",
+      "org.audacityteam.Audacity",
+      "org.gimp.GIMP",
+      "org.gnome.Loupe",
+      "org.kde.kdenlive"
+    ],
+    "exclude": []
+  },
+  "sway": {
+    "include": [],
+    "exclude": []
+  }
+}
