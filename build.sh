@@ -2,12 +2,17 @@
 
 set -eu
 
-if [ ! -f "$1" ]; then
-    printf 'error: packages_file %s does not exist\n' "$1"
-    exit 1
-fi
+mkdir -p /usr/etc/containers \
+    /etc/containers/registries.d \
+    /etc/pki/containers
 
-jq_args="-r '.all.{{X}}[], .\"$FEDORA_ATOMIC_SPIN\".{{X}}[]' $1"
+cp -r /ctx/files/system/etc/* /etc
+cp -r /ctx/files/system/usr/* /usr
+cp /ctx/files/signing/policy.json /usr/etc/containers/policy.json
+cp /ctx/files/signing/registry-config.yaml /etc/containers/registries.d/ryanpz.yaml
+cp /ctx/cosign.pub /etc/pki/containers/ryanpz.pub
+
+jq_args="-r '.all.{{X}}[], .\"$FEDORA_ATOMIC_SPIN\".{{X}}[]' /ctx/packages.json"
 package_list() {
     echo "$jq_args" | sed "s/{{X}}/$1/g" | xargs jq
 }
