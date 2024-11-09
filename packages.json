@@ -1,31 +1,13 @@
 {
   "all": {
     "include": [
-      "distrobox",
       "foot",
       "fzf",
-      "mbpfan",
       "ripgrep"
     ],
-    "exclude": [
-      "firefox",
-      "firefox-langpacks"
-    ]
-  },
-  "kinoite": {
-    "include": [
-      "wl-clipboard"
-    ],
-    "exclude": [
-      "plasma-discover-rpm-ostree",
-      "plasma-discover-flatpak"
-    ]
-  },
-  "sway-atomic": {
-    "include": [],
     "exclude": []
   },
-  "cosmic-atomic": {
+  "sericea-main": {
     "include": [],
     "exclude": []
   }

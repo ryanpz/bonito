@@ -1,20 +1,14 @@
-# fedora-atomic
+# bonito
 
-My customized Fedora Atomic Desktop OCI images
+bonito is a collection of [Universal Blue](https://github.com/ublue-os) OCI images personalized for my machines.
 
-Images based on the following atomic spins are built daily:
-* Kinoite ([base images](https://quay.io/repository/fedora-ostree-desktops/kinoite))
-* Sway Atomic ([base images](https://quay.io/repository/fedora-ostree-desktops/sway-atomic))
-* Cosmic Atomic ([base images](https://quay.io/repository/fedora-ostree-desktops/cosmic-atomic))
+The following variants are built daily:
+
+* bonito-sway (base: [ublue-os/sericea-main](https://github.com/ublue-os/main/pkgs/container/sericea-main))
 
 ## Changes from base images
 
 * Adds:
-  *  `distrobox`, `foot`, `fzf`, `mbpfan`, `ripgrep`
-  *  automatic daily system updates via `rpm-ostreed`
-  *  automatic daily flatpak updates
-  *  suspend on power button short press, poweroff on long press
-  *  public key and configurations required to verify these signed images
-* Removes:
-  *  `firefox`
-  *  desktop-specific automatic update systems
+  * `foot`, `fzf`, `ripgrep` packages
+  * suspend on power button short press, poweroff on long press
+  * public key and configurations required to verify these signed images
