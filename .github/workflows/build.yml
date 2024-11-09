@@ -7,16 +7,16 @@ on:
       - '**.md'
       - '**.txt'
   schedule:
-    - cron: '0 5 * * *'  # 5am UTC everyday (timed against official fedora container pushes)
+    - cron: '0 5 * * *'  # 5am UTC everyday (timed against official ublue container pushes)
   workflow_dispatch:
 env:
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
-  BASE_IMAGE_REGISTRY: quay.io/fedora-ostree-desktops
+  BASE_IMAGE_REGISTRY: ghcr.io/ublue-os
 
 jobs:
   push-ghcr:
     name: Build and push image
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -24,19 +24,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        atomic_spin:
-          - kinoite
-          - sway-atomic
-          - cosmic-atomic
+        ublue_variant:
+          - sericea-main
         major_version: [40, 41]
         include:
           - major_version: 41
             is_current_version: true
-        exclude:
-          - major_version: 40
-            atomic_spin: cosmic-atomic
-          - major_version: 40
-            atomic_spin: sway-atomic
+          - ublue_variant: sericea-main
+            image_name: bonito-sway
     steps:
       # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action
@@ -45,7 +40,7 @@ jobs:
       - name: Generate path to base image's repository
         id: base-image
         run: |
-          echo "path=${{ env.BASE_IMAGE_REGISTRY }}/${{ matrix.atomic_spin }}" >> $GITHUB_OUTPUT
+          echo "path=${{ env.BASE_IMAGE_REGISTRY }}/${{ matrix.ublue_variant }}" >> $GITHUB_OUTPUT
 
       - name: Generate tags
         id: generate-tags
@@ -82,20 +77,6 @@ jobs:
             fi
             echo "base_image_version=$ver" >> $GITHUB_OUTPUT
 
-      # Generate image metadata
-      - name: Image Metadata
-        uses: docker/metadata-action@v5
-        id: meta
-        with:
-          images: |
-            ${{ matrix.atomic_spin }}
-          labels: |
-            org.opencontainers.image.title=${{ matrix.atomic_spin }}
-            org.opencontainers.image.version=${{ steps.labels.outputs.outputs && fromJSON(steps.labels.outputs.outputs).base_image_version }}
-            org.opencontainers.image.description=A Fedora ${{ matrix.atomic_spin }} image customized by ryanpz
-            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository }}/main/README.md
-            io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/23235374?v=4
-
       - name: Pull base image
         uses: Wandalen/wretry.action@v3.7.0
         with:
@@ -106,6 +87,20 @@ jobs:
             # we can retry on that unfortunately common failure case
             podman pull ${{ steps.base-image.outputs.path }}:${{ matrix.major_version }}
 
+      # Generate image metadata
+      - name: Image Metadata
+        uses: docker/metadata-action@v5
+        id: meta
+        with:
+          images: |
+            ${{ matrix.image_name }}
+          labels: |
+            org.opencontainers.image.title=${{ matrix.image_name }}
+            org.opencontainers.image.version=${{ steps.labels.outputs.outputs && fromJSON(steps.labels.outputs.outputs).base_image_version }}
+            org.opencontainers.image.description=A Universal Blue ${{ matrix.ublue_variant }} image customized by ryanpz
+            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository }}/main/README.md
+            io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/23235374?v=4
+
       # Build image using Buildah action
       - name: Build Image
         id: build-image
@@ -113,11 +108,11 @@ jobs:
         with:
           containerfiles: |
             ./Containerfile
-          image: ${{ matrix.atomic_spin }}
+          image: ${{ matrix.image_name }}
           tags: |
             ${{ steps.generate-tags.outputs.tags }}
           build-args: |
-            FEDORA_ATOMIC_SPIN=${{ matrix.atomic_spin }}
+            UBLUE_VARIANT=${{ matrix.ublue_variant }}
             FEDORA_MAJOR_VERSION=${{ matrix.major_version }}
             BASE_IMAGE=${{ steps.base-image.outputs.path }}
           labels: ${{ steps.meta.outputs.labels }}
