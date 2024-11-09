@@ -24,6 +24,13 @@ include_list=$(package_list 'include')
 # shellcheck disable=SC2086
 [ -n "$include_list" ] && rpm-ostree install $include_list
 
+# Hack font
+mkdir -p /tmp/hack-font
+curl -Lo /tmp/hack-font/hack.tar.gz https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.tar.gz
+tar -xvzf /tmp/hack-font/hack.tar.gz -C /tmp/hack-font
+mv -v /tmp/hack-font/ttf /usr/share/fonts/hack
+rm -rf /tmp/hack-font
+
 # framework kernel modules
 rpm-ostree install /tmp/rpms/kmods/*framework-laptop*.rpm
 
