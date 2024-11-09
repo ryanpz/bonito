@@ -10,6 +10,7 @@ The following variants are built daily:
 
 * Adds:
   * `foot`, `fzf`, `ripgrep` packages
+  * `com.brave.Browser`, `com.github.tchx84.Flatseal`, `com.obsproject.Studio`, `com.valvesoftware.Steam`, `io.mpv.Mpv`, `org.audacityteam.Audacity`, `org.gimp.GIMP`, `org.gnome.Loupe`, `org.kde.kdenlive` via the user-invoked `install-flatpaks` script
   * [Hack font](https://github.com/source-foundry/Hack)
   * suspend on power button short press, poweroff on long press
   * Framework Laptop firmware and kernel modules
