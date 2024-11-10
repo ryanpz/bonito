@@ -3,6 +3,7 @@
     "include": [
       "foot",
       "fzf",
+      "power-profiles-daemon",
       "ripgrep"
     ],
     "exclude": []
