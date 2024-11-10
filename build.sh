@@ -30,6 +30,8 @@ mkdir -p /tmp/hack-font
 curl -Lo /tmp/hack-font/hack.tar.gz https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.tar.gz
 tar -xvzf /tmp/hack-font/hack.tar.gz -C /tmp/hack-font
 mv -v /tmp/hack-font/ttf /usr/share/fonts/hack
+chown -R root:root /usr/share/fonts/hack
+fc-cache -f /usr/share/fonts/hack
 rm -rf /tmp/hack-font
 
 # framework kernel modules
