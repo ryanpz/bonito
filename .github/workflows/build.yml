@@ -70,7 +70,7 @@ jobs:
 
       - name: Get base image version
         id: labels
-        uses: Wandalen/wretry.action@v3.7.0
+        uses: Wandalen/wretry.action@v3.7.2
         with:
           attempt_limit: 3
           attempt_delay: 15000
@@ -84,7 +84,7 @@ jobs:
             echo "base_image_version=$ver" >> $GITHUB_OUTPUT
 
       - name: Pull base image
-        uses: Wandalen/wretry.action@v3.7.0
+        uses: Wandalen/wretry.action@v3.7.2
         with:
           attempt_limit: 3
           attempt_delay: 15000
@@ -125,7 +125,7 @@ jobs:
           oci: false
 
       - name: Push To GHCR
-        uses: Wandalen/wretry.action@v3.7.0
+        uses: Wandalen/wretry.action@v3.7.2
         id: push
         env:
           REGISTRY_USER: ${{ github.actor }}
