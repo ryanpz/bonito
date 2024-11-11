@@ -32,6 +32,9 @@ jobs:
             is_current_version: true
           - source_image_name: sway-atomic
             target_image_name: bonito-sway
+        exclude:
+          - fedora_version: 40
+            source_image_name: sway-atomic
     steps:
       # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action
