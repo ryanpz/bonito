@@ -4,7 +4,6 @@
       "distrobox",
       "foot",
       "fzf",
-      "power-profiles-daemon",
       "ripgrep"
     ],
     "exclude": [
@@ -22,7 +21,9 @@
     ]
   },
   "sway-atomic": {
-    "include": [],
+    "include": [
+      "power-profiles-daemon"
+    ],
     "exclude": []
   }
 }
