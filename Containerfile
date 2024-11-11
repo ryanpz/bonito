@@ -1,17 +1,17 @@
-ARG UBLUE_VARIANT=sericea-main
-ARG BASE_IMAGE=ghcr.io/ublue-os/${UBLUE_VARIANT}
-ARG FEDORA_MAJOR_VERSION=41
+ARG SOURCE_IMAGE_NAME=sericea-main
+ARG SOURCE_IMAGE=ghcr.io/ublue-os/${SOURCE_IMAGE_NAME}
+ARG SOURCE_IMAGE_TAG=41
 
 FROM scratch AS ctx
 COPY ./ /
 
-FROM ${BASE_IMAGE}:${FEDORA_MAJOR_VERSION}
+FROM ${SOURCE_IMAGE}:${SOURCE_IMAGE_TAG}
 
-ARG UBLUE_VARIANT
-ARG FEDORA_MAJOR_VERSION
+ARG SOURCE_IMAGE_NAME
+ARG SOURCE_IMAGE_TAG
 
 # contains framework kernel modules
-COPY --from=ghcr.io/ublue-os/akmods:main-${FEDORA_MAJOR_VERSION} /rpms/ /tmp/rpms
+COPY --from=ghcr.io/ublue-os/akmods:main-${SOURCE_IMAGE_TAG} /rpms/ /tmp/rpms
 RUN find /tmp/rpms
 
 RUN --mount=type=cache,dst=/var/cache/rpm-ostree \

@@ -1,4 +1,4 @@
-name: build-image
+name: build-bonito
 on:
   push:
     branches:
@@ -10,11 +10,11 @@ on:
     - cron: '0 5 * * *'  # 5am UTC everyday (timed against official ublue container pushes)
   workflow_dispatch:
 env:
-  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
-  BASE_IMAGE_REGISTRY: ghcr.io/ublue-os
+  SOURCE_IMAGE_REGISTRY: ghcr.io/ublue-os
+  TARGET_IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
-  push-ghcr:
+  build_bonito:
     name: Build and push image
     runs-on: ubuntu-24.04
     permissions:
@@ -24,14 +24,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ublue_variant:
+        source_image_name:
           - sericea-main
-        major_version: [40, 41]
+        fedora_version: [40, 41]
         include:
-          - major_version: 41
+          - fedora_version: 41
             is_current_version: true
-          - ublue_variant: sericea-main
-            image_name: bonito-sway
+          - source_image_name: sericea-main
+            target_image_name: bonito-sway
     steps:
       # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action
@@ -40,7 +40,7 @@ jobs:
       - name: Generate path to base image's repository
         id: base-image
         run: |
-          echo "path=${{ env.BASE_IMAGE_REGISTRY }}/${{ matrix.ublue_variant }}" >> $GITHUB_OUTPUT
+          echo "path=${{ env.SOURCE_IMAGE_REGISTRY }}/${{ matrix.source_image_name }}" >> $GITHUB_OUTPUT
 
       - name: Generate tags
         id: generate-tags
@@ -48,7 +48,7 @@ jobs:
         run: |
           # Generate a timestamp for creating an image version history
           TIMESTAMP="$(date +%Y%m%d)"
-          MAJOR_VERSION="${{ matrix.major_version }}"
+          MAJOR_VERSION="${{ matrix.fedora_version }}"
           BUILD_TAGS=("${MAJOR_VERSION}" "${MAJOR_VERSION}-${TIMESTAMP}")
 
           if [[ "${{ matrix.is_current_version }}" == "true" ]]; then
@@ -70,7 +70,7 @@ jobs:
           attempt_delay: 15000
           command: |
             set -eo pipefail
-            ver=$(skopeo inspect docker://${{ steps.base-image.outputs.path }}:${{ matrix.major_version }} | jq -r '.Labels["org.opencontainers.image.version"]')
+            ver=$(skopeo inspect docker://${{ steps.base-image.outputs.path }}:${{ matrix.fedora_version }} | jq -r '.Labels["org.opencontainers.image.version"]')
             if [ -z "$ver" ] || [ "null" = "$ver" ]; then
               echo "inspected image version must not be empty or null"
               exit 1
@@ -85,7 +85,7 @@ jobs:
           command: |
             # pull the base image used for FROM in containerfile so
             # we can retry on that unfortunately common failure case
-            podman pull ${{ steps.base-image.outputs.path }}:${{ matrix.major_version }}
+            podman pull ${{ steps.base-image.outputs.path }}:${{ matrix.fedora_version }}
 
       # Generate image metadata
       - name: Image Metadata
@@ -93,11 +93,11 @@ jobs:
         id: meta
         with:
           images: |
-            ${{ matrix.image_name }}
+            ${{ matrix.target_image_name }}
           labels: |
-            org.opencontainers.image.title=${{ matrix.image_name }}
+            org.opencontainers.image.title=${{ matrix.target_image_name }}
             org.opencontainers.image.version=${{ steps.labels.outputs.outputs && fromJSON(steps.labels.outputs.outputs).base_image_version }}
-            org.opencontainers.image.description=A Universal Blue ${{ matrix.ublue_variant }} image customized by ryanpz
+            org.opencontainers.image.description=A Universal Blue ${{ matrix.target_image_name }} image customized by ryanpz
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository }}/main/README.md
             io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/23235374?v=4
 
@@ -108,13 +108,13 @@ jobs:
         with:
           containerfiles: |
             ./Containerfile
-          image: ${{ matrix.image_name }}
+          image: ${{ matrix.target_image_name }}
           tags: |
             ${{ steps.generate-tags.outputs.tags }}
           build-args: |
-            UBLUE_VARIANT=${{ matrix.ublue_variant }}
-            FEDORA_MAJOR_VERSION=${{ matrix.major_version }}
-            BASE_IMAGE=${{ steps.base-image.outputs.path }}
+            SOURCE_IMAGE_NAME=${{ matrix.source_image_name }}
+            SOURCE_IMAGE_TAG=${{ matrix.fedora_version }}
+            SOURCE_IMAGE=${{ steps.base-image.outputs.path }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: false
 
@@ -131,7 +131,7 @@ jobs:
           with: |
             image: ${{ steps.build-image.outputs.image }}
             tags: ${{ steps.build-image.outputs.tags }}
-            registry: ${{ env.IMAGE_REGISTRY }}
+            registry: ${{ env.TARGET_IMAGE_REGISTRY }}
             username: ${{ env.REGISTRY_USER }}
             password: ${{ env.REGISTRY_PASSWORD }}
             extra-args: |
@@ -149,7 +149,7 @@ jobs:
       
       - name: Sign container image
         run: |
-          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ env.IMAGE_REGISTRY }}/${{ steps.build-image.outputs.image }}@${TAGS}
+          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ env.TARGET_IMAGE_REGISTRY }}/${{ steps.build-image.outputs.image }}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.outputs && fromJSON(steps.push.outputs.outputs).digest }}
           COSIGN_EXPERIMENTAL: false
@@ -163,10 +163,10 @@ jobs:
     name: Check all builds successful
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
-    needs: [push-ghcr]
+    needs: [build_bonito]
     steps:
       - name: Exit on failure
-        if: ${{ needs.push-ghcr.result == 'failure' }}
+        if: ${{ needs.build_bonito.result == 'failure' }}
         shell: bash
         run: exit 1
       - name: Exit
