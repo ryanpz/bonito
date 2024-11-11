@@ -7,10 +7,10 @@ on:
       - '**.md'
       - '**.txt'
   schedule:
-    - cron: '0 5 * * *'  # 5am UTC everyday (timed against official ublue container pushes)
+    - cron: '0 5 * * *'  # 5am UTC everyday (timed against official fedora container pushes)
   workflow_dispatch:
 env:
-  SOURCE_IMAGE_REGISTRY: ghcr.io/ublue-os
+  SOURCE_IMAGE_REGISTRY: quay.io/fedora-ostree-desktops
   TARGET_IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
@@ -25,12 +25,12 @@ jobs:
       fail-fast: false
       matrix:
         source_image_name:
-          - sericea-main
+          - sway-atomic
         fedora_version: [40, 41]
         include:
           - fedora_version: 41
             is_current_version: true
-          - source_image_name: sericea-main
+          - source_image_name: sway-atomic
             target_image_name: bonito-sway
     steps:
       # Checkout push-to-registry action github repository

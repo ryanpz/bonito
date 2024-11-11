@@ -1,14 +1,27 @@
 {
   "all": {
     "include": [
+      "distrobox",
       "foot",
       "fzf",
       "power-profiles-daemon",
       "ripgrep"
     ],
-    "exclude": []
+    "exclude": [
+      "firefox",
+      "firefox-langpacks"
+    ]
   },
-  "sericea-main": {
+  "kinoite": {
+    "include": [
+      "wl-clipboard"
+    ],
+    "exclude": [
+      "plasma-discover-rpm-ostree",
+      "plasma-discover-flatpak"
+    ]
+  },
+  "sway-atomic": {
     "include": [],
     "exclude": []
   }

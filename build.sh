@@ -25,6 +25,10 @@ include_list=$(package_list 'include')
 # shellcheck disable=SC2086
 [ -n "$include_list" ] && rpm-ostree install $include_list
 
+systemctl enable rpm-ostreed-automatic.timer
+systemctl enable flatpak-system-update.timer
+systemctl --global enable flatpak-user-update.timer
+
 # Hack font
 mkdir -p /tmp/hack-font
 curl -Lo /tmp/hack-font/hack.tar.gz https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.tar.gz
@@ -33,9 +37,6 @@ mv -v /tmp/hack-font/ttf /usr/share/fonts/hack
 chown -R root:root /usr/share/fonts/hack
 fc-cache -f /usr/share/fonts/hack
 rm -rf /tmp/hack-font
-
-# framework kernel modules
-rpm-ostree install /tmp/rpms/kmods/*framework-laptop*.rpm
 
 # framework firmware
 # from https://github.com/ublue-os/bluefin/blob/f833e1f6a5d1863b26e6f24a5ec28068d511b3de/build_files/base/08-firmware.sh
