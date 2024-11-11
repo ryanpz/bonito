@@ -26,12 +26,15 @@ jobs:
       matrix:
         source_image_name:
           - sway-atomic
+          - kinoite
         fedora_version: [40, 41]
         include:
           - fedora_version: 41
             is_current_version: true
           - source_image_name: sway-atomic
             target_image_name: bonito-sway
+          - source_image_name: kinoite
+            target_image_name: bonito-kde
         exclude:
           - fedora_version: 40
             source_image_name: sway-atomic
