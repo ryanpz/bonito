@@ -24,9 +24,9 @@ package_list() {
 exclude_list=$(package_list 'exclude')
 include_list=$(package_list 'include')
 
-flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --system --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # shellcheck disable=SC2086
-[ -n "$exclude_list" ] && flatpak uninstall --user -y flathub $exclude_list
+[ -n "$exclude_list" ] && flatpak uninstall --system -y flathub $exclude_list
 # shellcheck disable=SC2086
-[ -n "$include_list" ] && flatpak install --user -y flathub $include_list
+[ -n "$include_list" ] && flatpak install --system -y flathub $include_list
