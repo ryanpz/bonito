@@ -15,3 +15,7 @@ The following variants are built daily:
   * suspend on power button short press, poweroff on long press
   * Framework Laptop firmware
   * public key and configurations required to verify these signed images
+
+* Removes:
+  *  `firefox`, `tuned-ppd` packages
+  *  desktop-specific automatic update systems
