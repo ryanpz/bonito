@@ -4,6 +4,7 @@
       "distrobox",
       "foot",
       "fzf",
+      "power-profiles-daemon",
       "ripgrep"
     ],
     "exclude": [
@@ -16,14 +17,13 @@
       "wl-clipboard"
     ],
     "exclude": [
+      "plasma-discover-flatpak",
       "plasma-discover-rpm-ostree",
-      "plasma-discover-flatpak"
+      "tuned-ppd"
     ]
   },
   "sway-atomic": {
-    "include": [
-      "power-profiles-daemon"
-    ],
+    "include": [],
     "exclude": []
   }
 }
