@@ -8,13 +8,14 @@
       "io.mpv.Mpv",
       "org.audacityteam.Audacity",
       "org.gimp.GIMP",
-      "org.gnome.Loupe",
       "org.kde.kdenlive"
     ],
     "exclude": []
   },
   "sway": {
-    "include": [],
+    "include": [
+      "org.gnome.Loupe"
+    ],
     "exclude": []
   },
   "kinoite": {
