@@ -11,6 +11,9 @@ case "$VARIANT_ID" in
 *sway*)
 	variant='sway'
 	;;
+*kinoite*)
+	variant='kinoite'
+	;;
 esac
 
 jq_args="-r '.all.{{X}}[], .\"$variant\".{{X}}[]' $FLATPAKS"

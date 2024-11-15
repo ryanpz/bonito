@@ -16,5 +16,9 @@
   "sway": {
     "include": [],
     "exclude": []
+  },
+  "kinoite": {
+    "include": [],
+    "exclude": []
   }
 }
