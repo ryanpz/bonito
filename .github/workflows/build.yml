@@ -43,7 +43,7 @@ jobs:
       - name: Generate path to base image's repository
         id: base-image
         run: |
-          echo "path=${{ env.SOURCE_IMAGE_REGISTRY }}/${{ matrix.source_image_name }}" >> $GITHUB_OUTPUT
+          echo "path=${{ matrix.source_image_registry || env.SOURCE_IMAGE_REGISTRY }}/${{ matrix.source_image_name }}" >> $GITHUB_OUTPUT
 
       - name: Generate tags
         id: generate-tags
@@ -100,7 +100,7 @@ jobs:
           labels: |
             org.opencontainers.image.title=${{ matrix.target_image_name }}
             org.opencontainers.image.version=${{ steps.labels.outputs.outputs && fromJSON(steps.labels.outputs.outputs).base_image_version }}
-            org.opencontainers.image.description=A Universal Blue ${{ matrix.target_image_name }} image customized by ryanpz
+            org.opencontainers.image.description=A Fedora ${{ matrix.source_image_name }} image customized by ryanpz
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository }}/main/README.md
             io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/23235374?v=4
 
@@ -115,9 +115,9 @@ jobs:
           tags: |
             ${{ steps.generate-tags.outputs.tags }}
           build-args: |
+            SOURCE_IMAGE_REGISTRY=${{ matrix.source_image_registry || env.SOURCE_IMAGE_REGISTRY }}
             SOURCE_IMAGE_NAME=${{ matrix.source_image_name }}
             SOURCE_IMAGE_TAG=${{ matrix.fedora_version }}
-            SOURCE_IMAGE=${{ steps.base-image.outputs.path }}
           labels: ${{ steps.meta.outputs.labels }}
           oci: false
 
