@@ -5,7 +5,8 @@
       "foot",
       "fzf",
       "power-profiles-daemon",
-      "ripgrep"
+      "ripgrep",
+      "source-foundry-hack-fonts"
     ],
     "exclude": [
       "firefox",
