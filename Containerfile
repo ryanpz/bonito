@@ -10,7 +10,8 @@ FROM ${SOURCE_IMAGE_REFERENCE}
 
 ARG SOURCE_IMAGE_NAME
 
-RUN --mount=type=cache,dst=/var/cache/rpm-ostree \
-    --mount=type=bind,from=ctx,source=/,target=/ctx \
+RUN --mount=type=cache,dst=/var/cache/libdnf5 \
+    --mount=type=bind,from=ctx,src=/,dst=/ctx \
     /ctx/build.sh  && \
+    bootc container lint && \
     ostree container commit
