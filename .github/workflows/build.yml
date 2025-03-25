@@ -27,7 +27,7 @@ jobs:
         source_image_name:
           - sway-atomic
           - kinoite
-        fedora_version: [41]
+        fedora_version: [41, 42]
         include:
           - fedora_version: 41
             is_current_version: true
