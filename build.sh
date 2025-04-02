@@ -3,7 +3,7 @@
 set -eu
 
 mkdir -p /etc/containers/registries.d \
-    /etc/pki/containers
+	/etc/pki/containers
 
 cp -r /ctx/files/system/etc/* /etc
 cp -r /ctx/files/system/usr/* /usr
@@ -13,7 +13,7 @@ cp /ctx/cosign.pub /etc/pki/containers/ryanpz.pub
 
 jq_args="-r '.all.{{X}}[], .\"$SOURCE_IMAGE_NAME\".{{X}}[]' /ctx/packages.json"
 package_list() {
-    echo "$jq_args" | sed "s/{{X}}/$1/g" | xargs jq
+	echo "$jq_args" | sed "s/{{X}}/$1/g" | xargs jq
 }
 
 exclude_list=$(package_list 'exclude')
@@ -45,13 +45,13 @@ rm -rfv /usr/etc
 rm -rfv /boot/*
 
 for d in /var/*; do
-    if [ "$d" != '/var/cache' ]; then
-        rm -rfv "$d"/*
-    fi
+	if [ "$d" != '/var/cache' ]; then
+		rm -rfv "${d:?}"/*
+	fi
 done
 
 for d in /var/cache/*; do
-    if [ "$d" != '/var/cache/libdnf5' ]; then
-        rm -rfv "$d"/*
-    fi
+	if [ "$d" != '/var/cache/libdnf5' ]; then
+		rm -rfv "${d:?}"/*
+	fi
 done
