@@ -1,7 +1,6 @@
 {
   "all": {
     "include": [
-      "com.brave.Browser",
       "com.github.tchx84.Flatseal",
       "com.obsproject.Studio",
       "com.valvesoftware.Steam",
@@ -9,6 +8,7 @@
       "org.audacityteam.Audacity",
       "org.gimp.GIMP",
       "org.kde.kdenlive",
+      "org.mozilla.firefox",
       "org.signal.Signal"
     ],
     "exclude": []
