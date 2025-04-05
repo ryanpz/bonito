@@ -1,3 +1,7 @@
+# _Archival Notice_
+
+This project has been obsoleted by [systemd-sysexts](https://github.com/ryanpz/fedora-sysexts). I've converted all of the important image modifications into sysexts, allowing me to rebase my machines directly to the upstream base images 🎉.
+
 # bonito
 
 bonito is a collection of [Fedora Atomic Desktop](https://fedoraproject.org/atomic-desktops) OCI images personalized for my machines.
