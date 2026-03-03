@@ -10,5 +10,6 @@ The following variants are built daily:
 ## Changes from base images
 
 * Adds:
+  * a `/nix` directory to support multi-user Nix installs
   * automatic system and flatpak updates
   * public key and configurations required to verify these signed images

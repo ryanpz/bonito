@@ -8,6 +8,8 @@ COPY ./ /
 
 FROM ${SOURCE_IMAGE_REFERENCE}
 
+RUN mkdir /nix
+
 ARG SOURCE_IMAGE_NAME
 
 RUN --mount=type=bind,from=ctx,src=/,dst=/ctx \
