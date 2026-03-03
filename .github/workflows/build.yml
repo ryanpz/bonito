@@ -38,7 +38,7 @@ jobs:
     steps:
       # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Generate path to base image's repository
         id: base-image
