@@ -4,8 +4,8 @@ bonito is a collection of [Fedora Atomic Desktop](https://fedoraproject.org/atom
 
 The following variants are built daily:
 
+* bonito (base: [silverblue](https://quay.io/repository/fedora-ostree-desktops/silverblue))
 * bonito-sway (base: [sway-atomic](https://quay.io/repository/fedora-ostree-desktops/sway-atomic))
-* bonito-kde (base: [kinoite](https://quay.io/repository/fedora-ostree-desktops/kinoite))
 
 ## Changes from base images
 
