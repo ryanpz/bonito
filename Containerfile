@@ -10,8 +10,11 @@ FROM ${SOURCE_IMAGE_REFERENCE}
 
 ARG SOURCE_IMAGE_NAME
 
-RUN --mount=type=cache,dst=/var/cache/libdnf5 \
-    --mount=type=bind,from=ctx,src=/,dst=/ctx \
+RUN --mount=type=bind,from=ctx,src=/,dst=/ctx \
+    --mount=type=cache,target=/var/cache \
+    --mount=type=cache,target=/var/log \
+    --mount=type=tmpfs,target=/tmp \
     /ctx/build.sh  && \
-    bootc container lint && \
     ostree container commit
+
+RUN ["bootc", "container", "lint"]
