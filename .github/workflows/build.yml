@@ -36,9 +36,11 @@ jobs:
           - source_image_name: silverblue
             target_image_name: bonito
     steps:
-      # Checkout push-to-registry action github repository
       - name: Checkout Push to Registry action
         uses: actions/checkout@v6
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.10.1
 
       - name: Generate path to base image's repository
         id: base-image
@@ -90,7 +92,6 @@ jobs:
             # we can retry on that unfortunately common failure case
             podman pull ${{ steps.base-image.outputs.path }}:${{ matrix.fedora_version }}
 
-      # Generate image metadata
       - name: Image Metadata
         uses: docker/metadata-action@v5
         id: meta
@@ -104,7 +105,6 @@ jobs:
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository }}/main/README.md
             io.artifacthub.package.logo-url=https://avatars.githubusercontent.com/u/23235374?v=4
 
-      # Build image using Buildah action
       - name: Build Image
         id: build-image
         uses: redhat-actions/buildah-build@v2
@@ -147,12 +147,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
-      # Sign container
-      - uses: sigstore/cosign-installer@v4.0.0
-      
       - name: Sign container image
         run: |
-          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ env.TARGET_IMAGE_REGISTRY }}/${{ steps.build-image.outputs.image }}@${TAGS}
+          cosign sign -y \
+            --registry-referrers-mode legacy \
+            --key env://COSIGN_PRIVATE_KEY \
+            ${{ env.TARGET_IMAGE_REGISTRY }}/${{ steps.build-image.outputs.image }}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.outputs && fromJSON(steps.push.outputs.outputs).digest }}
           COSIGN_EXPERIMENTAL: false
