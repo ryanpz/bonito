@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v3.10.1
+        uses: sigstore/cosign-installer@v4.1.0
 
       - name: Generate path to base image's repository
         id: base-image
